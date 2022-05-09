@@ -2,10 +2,14 @@ const { Schema, model } = require('mongoose');
 
 const OrderSchema = new Schema({
     details: [{
-        _id : false,
+        _id: false,
         product: {
             type: Schema.ObjectId,
             ref: 'Product',
+            required: true
+        },
+        productName: {
+            type: String,
             required: true
         },
         priceOnDate: {
@@ -19,8 +23,16 @@ const OrderSchema = new Schema({
         subtotal: {
             type: Number,
             required: true
-        },
+        }
     }],
+    paymentReference: {
+        type: String,
+        default: ""
+    },
+    total: {
+        type: Number,
+        required: true
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User',

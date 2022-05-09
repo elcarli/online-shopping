@@ -90,7 +90,7 @@ async function productsByUser({ params: { id } }, res, next) {
 async function login({ body: { email, password } }, res, next) {
   try {
     if (!(email && password)) {
-      res.status(400).json({ message: "All input is required"});
+      res.status(400).json({ message: "All input is required" });
     }
 
     const user = await User.findOne({ email: email });
@@ -114,6 +114,11 @@ async function login({ body: { email, password } }, res, next) {
   }
 }
 
+
+function renderPayOrder(req, res, next) {
+  res.render('index', { ORDER_ID: req.params.orderId })
+}
+
 module.exports = {
   getAll,
   getOne,
@@ -121,5 +126,6 @@ module.exports = {
   edit,
   deleteOne,
   productsByUser,
-  login
+  login,
+  renderPayOrder
 }
